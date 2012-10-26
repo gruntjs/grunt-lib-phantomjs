@@ -30,7 +30,7 @@
     "eventemitter2": "~0.4.9",
     "semver": "~1.0.14",
     "temporary": "~0.0.4",
-    "phantomjs": "~0.2.0"
+    "phantomjs": "~0.2.2"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "0.1.0",
