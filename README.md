@@ -14,7 +14,7 @@ If a Grunt task looked something like this:
 
 ```js
 grunt.registerTask('mytask', 'Integrate with phantomjs.', function() {
-  var phantomjs = require('./lib/phantomjs').init(grunt);
+  var phantomjs = require('grunt-lib-phantomjs').init(grunt);
   var errorCount = 0;
 
   // Handle any number of namespaced events like so.
