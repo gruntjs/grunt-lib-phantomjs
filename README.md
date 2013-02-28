@@ -32,6 +32,17 @@ grunt.registerTask('mytask', 'Integrate with phantomjs.', function() {
     phantomjs.halt();
   });
 
+  // Built-in error handlers.
+  phantomjs.on('fail.load', function(url) {
+    phantomjs.halt();
+    grunt.warn('PhantomJS unable to load URL.');
+  });
+
+  phantomjs.on('fail.timeout', function() {
+    phantomjs.halt();
+    grunt.warn('PhantomJS timed out.');
+  });
+
   // This task is async.
   var done = this.async();
 
