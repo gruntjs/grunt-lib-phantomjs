@@ -115,14 +115,15 @@ page.onInitialized = function() {
   });
 };
 
-// Run when the page has finished loading.
+// Run when the page or any iFrame has finished loading.
 page.onLoadFinished = function(status) {
   // The window has loaded.
   sendMessage('onLoadFinished', status);
   if (status !== 'success') {
     // File loading failure.
     sendMessage('fail.load', url);
-    phantom.exit();
+    // this event could be caused by any iframe!
+    // and since phantom.exit() will not be handle correctly by clients any, just do nothing
   }
 };
 
