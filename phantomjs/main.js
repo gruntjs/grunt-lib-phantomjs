@@ -18,6 +18,8 @@ var tmpfile = phantom.args[0];
 var url = phantom.args[1];
 // Extra, optionally overridable stuff.
 var options = JSON.parse(phantom.args[2] || {});
+// load instrumented file data from the file/transport
+var instrumentedFiles = JSON.parse(fs.read(options.transport.coverage));
 
 // Default options.
 if (!options.timeout) { options.timeout = 5000; }
@@ -84,9 +86,43 @@ page.onConsoleMessage = function(message) {
   sendMessage('console', message);
 };
 
-// For debugging.
-page.onResourceRequested = function(request) {
+// For debugging & coverage
+page.onResourceRequested = function(request, networkRequest) {
   sendMessage('onResourceRequested', request.url);
+
+  // determine the protocol
+  var isFile = !!(request.url.search('file://') !== -1);
+  var isHttp = !!(request.url.search('http://') !== -1);
+  var isHttps = !!(request.url.search('https://') !== -1);
+
+  // process file based ressources
+  if (isFile) {
+      var currentFile = request.url.replace('file://', '');
+      if (!!instrumentedFiles[currentFile]) {
+        var content = instrumentedFiles[currentFile];
+        fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
+        networkRequest.changeUrl(options.transport.instrumentedFiles + currentFile);
+      }
+  }
+
+  // process http based ressources
+   if (isHttp || isHttps) {
+      var undef;
+      var temp = isHttp ? request.url.replace('http://', '').split('/') : request.url.replace('https://', '').split('/');
+      temp.shift();
+      var currentFile = temp.join('/');
+      if (!!instrumentedFiles[currentFile]) {
+        var content = instrumentedFiles[currentFile];
+        if (options.transport.instrumentedFiles === undef) {
+            options.transport.instrumentedFiles = 'temp';
+        }
+
+        try {
+            fs.write(options.transport.instrumentedFiles + '/' + currentFile, content, 'w');
+            networkRequest.changeUrl(options.transport.instrumentedFiles + '/' + currentFile);
+        } catch (e) {}
+      }
+  }
 };
 
 page.onResourceReceived = function(request) {
