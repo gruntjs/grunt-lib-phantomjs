@@ -1,7 +1,7 @@
 {
-  "name": "grunt-lib-phantomjs",
-  "description": "Grunt and PhantomJS, sitting in a tree.",
-  "version": "0.2.0",
+  "name": "grunt-lib-phantomjs-istanbul",
+  "description": "Grunt and PhantomJS, sitting in a tree for istanbul based code coverage.",
+  "version": "0.1.0",
   "homepage": "http://github.com/gruntjs/grunt-lib-phantomjs",
   "author": {
     "name": "Grunt Team",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gruntjs/grunt-lib-phantomjs.git"
+    "url": "git://github.com/asciidisco/grunt-lib-phantomjs-istanbul.git"
   },
   "bugs": {
-    "url": "https://github.com/gruntjs/grunt-lib-phantomjs/issues"
+    "url": "https://github.com/asciidisco/grunt-lib-phantomjs-istanbul/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/gruntjs/grunt-lib-phantomjs/blob/master/LICENSE-MIT"
+      "url": "http://github.com/asciidisco/grunt-lib-phantomjs-istanbul/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
@@ -30,7 +30,7 @@
     "eventemitter2": "~0.4.9",
     "semver": "~1.0.14",
     "temporary": "~0.0.4",
-    "phantomjs": "git://github.com/asciidisco/phantomjs.git#master"
+    "phantomjs": "~1.9.0-0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",

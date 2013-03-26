@@ -19,7 +19,12 @@ var url = phantom.args[1];
 // Extra, optionally overridable stuff.
 var options = JSON.parse(phantom.args[2] || {});
 // load instrumented file data from the file/transport
-var instrumentedFiles = JSON.parse(fs.read(options.transport.coverage));
+var instrumentedFiles = {};
+var useInstrumentedFiles = false;
+if (options.transport && options.transport.coverage) {
+  instrumentedFiles = JSON.parse(fs.read(options.transport.coverage));
+  useInstrumentedFiles = true;
+}
 
 // Default options.
 if (!options.timeout) { options.timeout = 5000; }
@@ -89,6 +94,9 @@ page.onConsoleMessage = function(message) {
 // For debugging & coverage
 page.onResourceRequested = function(request, networkRequest) {
   sendMessage('onResourceRequested', request.url);
+
+  // check if we use code coverage is enabled
+  if (!useInstrumentedFiles) return;
 
   // determine the protocol
   var isFile = !!(request.url.search('file://') !== -1);
