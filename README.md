@@ -14,7 +14,7 @@ This lib has a few options that can be added to it:
 
 * `timeout`: phantomjs' timeout, in milliseconds.
 * `inject`: Javascript to inject into the page.
-* `headers`: an object of headers to add to phantomjs' `page.customHeaders`.
+* `page`: an object of options for the phantomjs `page` object.
 
 ## An inline example
 

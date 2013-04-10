@@ -56,8 +56,10 @@ var inject = function() {
   injected = true;
 };
 
-if (options.headers) {
-    page.customHeaders = options.headers;
+if (options.page) {
+  for (var prop in options.page) {
+    page[prop] = options.page[prop];
+  }
 }
 
 // Keep track if the client-side helper script already has been injected.

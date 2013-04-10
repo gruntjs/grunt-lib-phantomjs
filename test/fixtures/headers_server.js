@@ -1,10 +1,8 @@
-var _, conf, express, fs, port, site;
-
-_ = require('underscore');
-fs = require('fs');
-express = require('express');
-
-site = express();
+var _ = require('underscore');
+var fs = require('fs');
+var express = require('express'); 
+var port = 8000;
+var site = express();
 
 site.get('*', function(req, res) {
   fs.readFile('./test/fixtures/headers.html', 'utf8', function (err, data) {  
@@ -14,8 +12,6 @@ site.get('*', function(req, res) {
     res.end();
   });
 });
-
-port = 8000;
 
 site.listen(port);
 
