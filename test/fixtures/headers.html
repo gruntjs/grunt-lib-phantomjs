@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+// Send messages to the parent PhantomJS process via alert! Good times!!
+function sendMessage() {
+  var args = [].slice.call(arguments);
+  alert(JSON.stringify(args));
+}
+
+// Template the headers out
+var headers = {
+  <% _.each(_.pairs(headers), function(pair) { %> "<%= pair[0] %>":"<%= pair[1] %>", <% }); %>
+};
+
+for (var prop in headers) {
+  sendMessage('debug', prop + ":" + headers[prop]);
+}
+sendMessage('test', headers['x-custom']);
+sendMessage('done');
+
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -56,6 +56,10 @@ var inject = function() {
   injected = true;
 };
 
+if (options.headers) {
+    page.customHeaders = options.headers;
+}
+
 // Keep track if the client-side helper script already has been injected.
 page.onUrlChanged = function(newUrl) {
   injected = false;
