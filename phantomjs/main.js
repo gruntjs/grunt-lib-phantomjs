@@ -56,6 +56,7 @@ var inject = function() {
   injected = true;
 };
 
+// Add options to the page.
 if (options.page) {
   for (var prop in options.page) {
     page[prop] = options.page[prop];
