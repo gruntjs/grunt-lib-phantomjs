@@ -1,7 +1,7 @@
 {
   "name": "grunt-lib-phantomjs-istanbul",
   "description": "Grunt and PhantomJS, sitting in a tree for istanbul based code coverage.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://github.com/gruntjs/grunt-lib-phantomjs",
   "author": {
     "name": "Grunt Team",
