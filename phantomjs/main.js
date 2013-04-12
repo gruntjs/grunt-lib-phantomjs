@@ -106,6 +106,12 @@ page.onResourceRequested = function(request, networkRequest) {
   // process file based ressources
   if (isFile) {
       var currentFile = request.url.replace('file://', '');
+      
+      // check for query params (and thropw them away)
+      if (currentFile.indexOf('?') > 0) {
+        currentFile = currentFile.substr(0, currentFile.indexOf('?'));
+      }
+      
       if (!!instrumentedFiles[currentFile]) {
         var content = instrumentedFiles[currentFile];
         fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
