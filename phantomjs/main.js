@@ -51,8 +51,9 @@ var injected;
 var inject = function() {
   if (injected) { return; }
   // Inject client-side helper script.
+  var scripts = Array.isArray(options.inject) ? options.inject : [options.inject];
   sendMessage('inject', options.inject);
-  page.injectJs(options.inject);
+  scripts.forEach(page.injectJs);
   injected = true;
 };
 
