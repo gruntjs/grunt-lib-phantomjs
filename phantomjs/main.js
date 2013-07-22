@@ -127,5 +127,10 @@ page.onLoadFinished = function(status) {
   }
 };
 
+if (options.viewportSize && 
+    (options.viewportSize.width || options.viewportSize.height)) {
+  page.viewportSize = options.viewportSize;
+}
+
 // Actually load url.
 page.open(url);
