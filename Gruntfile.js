@@ -49,11 +49,27 @@ module.exports = function(grunt) {
           page: {
             customHeaders: {
               'X-CUSTOM': 'custom_header_567'
-            }
+            },
           },
           expected: 'custom_header_567',
           test: function test(msg) {
             test.actual = msg;
+          }
+        }
+      },
+      viewportSize: {
+        options: {
+          url: 'test/fixtures/viewportSize.html',
+          page: {
+            viewportSize: { 
+              width: 1366, 
+              height: 800 
+            },
+          },
+          expected: [1366, 800],
+          test: function test(a, b) {
+            if (!test.actual) { test.actual = []; }
+            test.actual.push(a, b);
           }
         }
       },
