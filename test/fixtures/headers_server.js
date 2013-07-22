@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var fs = require('fs');
 var express = require('express'); 
 var port = 8000;
@@ -15,4 +15,4 @@ site.get('*', function(req, res) {
 
 site.listen(port);
 
-console.log("Listening on port " + port);
+console.log('Listening on port ' + port);

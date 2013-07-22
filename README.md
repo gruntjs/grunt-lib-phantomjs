@@ -10,11 +10,9 @@ Also, in the case of the grunt-contrib-qunit plugin, it's important to know that
 
 ### Options
 
-This lib has a few options that can be added to it:
-
-* `timeout`: phantomjs' timeout, in milliseconds.
-* `inject`: Javascript to inject into the page.
-* `page`: an object of options for the phantomjs `page` object.
+* `timeout`: PhantomJS' timeout, in milliseconds.
+* `inject`: JavaScript to inject into the page.
+* `page`: an object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
 
 ## An inline example
 
