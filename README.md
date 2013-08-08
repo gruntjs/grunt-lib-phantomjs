@@ -96,6 +96,11 @@ Warning: Task "mytask" failed. Use --force to continue.
 Aborted due to warnings.
 ```
 
+## OS Dependencies
+PhantomJS requires these dependencies
+**On Ubuntu/Debian**
+  apt-get install libfontconfig1 fontconfig libfontconfig1-dev libfreetype6-dev
+
 ## Release History
 
 * 2013-02-28 - v0.3.0 - Use PhantomJS 1.9.0-1.
