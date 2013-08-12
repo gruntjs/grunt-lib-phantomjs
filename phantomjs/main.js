@@ -118,6 +118,9 @@ page.onInitialized = function() {
 
 // Run when the page has finished loading.
 page.onLoadFinished = function(status) {
+  // reset this handler to a no-op so further calls to onLoadFinished from iframes don't affect us
+  page.onLoadFinished = function() { /* no-op */}
+
   // The window has loaded.
   sendMessage('onLoadFinished', status);
   if (status !== 'success') {
