@@ -87,12 +87,12 @@ page.onConsoleMessage = function(message) {
 
 // For debugging.
 page.onResourceRequested = function(request) {
-  sendMessage('onResourceRequested', request.url);
+  sendMessage('onResourceRequested', request);
 };
 
 page.onResourceReceived = function(request) {
   if (request.stage === 'end') {
-    sendMessage('onResourceReceived', request.url);
+    sendMessage('onResourceReceived', request);
   }
 };
 
