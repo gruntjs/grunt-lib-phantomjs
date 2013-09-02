@@ -116,7 +116,7 @@ page.onInitialized = function() {
   });
 };
 
-// Run when the page has finished loading.
+// Run when the page or any iFrame has finished loading.
 page.onLoadFinished = function(status) {
   // reset this handler to a no-op so further calls to onLoadFinished from iframes don't affect us
   page.onLoadFinished = function() { /* no-op */}
@@ -126,7 +126,8 @@ page.onLoadFinished = function(status) {
   if (status !== 'success') {
     // File loading failure.
     sendMessage('fail.load', url);
-    phantom.exit();
+    // this event could be caused by any iframe!
+    // and since phantom.exit() will not be handle correctly by clients any, just do nothing
   }
 };
 
