@@ -1,3 +1,12 @@
+v0.4.0:
+  date: 2013-09-02
+  changes:
+    - removed phantom.exit on failures after first load /24 /18
+    - return full request object for debugging /34
+v0.3.0:
+  date: 2013-04-03
+  changes:
+    - bumped phantomjs to 1.9.0-1
 v0.1.0:
   date: 2012-10-05
   changes:

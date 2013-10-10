@@ -58,8 +58,9 @@ var injected;
 var inject = function() {
   if (injected) { return; }
   // Inject client-side helper script.
+  var scripts = Array.isArray(options.inject) ? options.inject : [options.inject];
   sendMessage('inject', options.inject);
-  page.injectJs(options.inject);
+  scripts.forEach(page.injectJs);
   injected = true;
 };
 
@@ -93,55 +94,56 @@ page.onConsoleMessage = function(message) {
 
 // For debugging & coverage
 page.onResourceRequested = function(request, networkRequest) {
-  sendMessage('onResourceRequested', request.url);
+  sendMessage('onResourceRequested', request);
 
   // check if we use code coverage is enabled
-  if (!useInstrumentedFiles) return;
+  if (!useInstrumentedFiles) { return; }
 
   // determine the protocol
   var isFile = !!(request.url.search('file://') !== -1);
   var isHttp = !!(request.url.search('http://') !== -1);
   var isHttps = !!(request.url.search('https://') !== -1);
 
+  var currentFile, content;
   // process file based ressources
   if (isFile) {
-      var currentFile = request.url.replace('file://', '');
-      
-      // check for query params (and thropw them away)
-      if (currentFile.indexOf('?') > 0) {
-        currentFile = currentFile.substr(0, currentFile.indexOf('?'));
-      }
-      
-      if (!!instrumentedFiles[currentFile]) {
-        var content = instrumentedFiles[currentFile];
-        fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
-        networkRequest.changeUrl(options.transport.instrumentedFiles + currentFile);
-      }
+    currentFile = request.url.replace('file://', '');
+
+    // check for query params (and thropw them away)
+    if (currentFile.indexOf('?') > 0) {
+      currentFile = currentFile.substr(0, currentFile.indexOf('?'));
+    }
+
+    if (!!instrumentedFiles[currentFile]) {
+      content = instrumentedFiles[currentFile];
+      fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
+      networkRequest.changeUrl(options.transport.instrumentedFiles + currentFile);
+    }
   }
 
   // process http based ressources
-   if (isHttp || isHttps) {
-      var undef;
-      var temp = isHttp ? request.url.replace('http://', '').split('/') : request.url.replace('https://', '').split('/');
-      temp.shift();
-      var currentFile = temp.join('/');
-      if (!!instrumentedFiles[currentFile]) {
-        var content = instrumentedFiles[currentFile];
-        if (options.transport.instrumentedFiles === undef) {
-            options.transport.instrumentedFiles = 'temp';
-        }
-
-        try {
-            fs.write(options.transport.instrumentedFiles + '/' + currentFile, content, 'w');
-            networkRequest.changeUrl(options.transport.instrumentedFiles + '/' + currentFile);
-        } catch (e) {}
+  if (isHttp || isHttps) {
+    var undef;
+    var temp = isHttp ? request.url.replace('http://', '').split('/') : request.url.replace('https://', '').split('/');
+    temp.shift();
+    currentFile = temp.join('/');
+    if (!!instrumentedFiles[currentFile]) {
+      content = instrumentedFiles[currentFile];
+      if (options.transport.instrumentedFiles === undef) {
+        options.transport.instrumentedFiles = 'temp';
       }
+
+      try {
+        fs.write(options.transport.instrumentedFiles + '/' + currentFile, content, 'w');
+        networkRequest.changeUrl(options.transport.instrumentedFiles + '/' + currentFile);
+      } catch (e) {}
+    }
   }
 };
 
 page.onResourceReceived = function(request) {
   if (request.stage === 'end') {
-    sendMessage('onResourceReceived', request.url);
+    sendMessage('onResourceReceived', request);
   }
 };
 
@@ -167,6 +169,9 @@ page.onInitialized = function() {
 
 // Run when the page has finished loading.
 page.onLoadFinished = function(status) {
+  // reset this handler to a no-op so further calls to onLoadFinished from iframes don't affect us
+  page.onLoadFinished = function() { /* no-op */};
+
   // The window has loaded.
   sendMessage('onLoadFinished', status);
   if (status !== 'success') {
