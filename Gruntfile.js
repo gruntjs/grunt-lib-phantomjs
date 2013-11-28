@@ -44,7 +44,7 @@ module.exports = function(grunt) {
       },
       headers: {
         options: {
-          url: 'http://localhost:8000',
+          url: 'http://localhost:8075',
           server: './test/fixtures/headers_server.js',
           page: {
             customHeaders: {

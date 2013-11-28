@@ -10,13 +10,11 @@ function sendMessage() {
 }
 
 // Template the headers out
-var headers = {
-  <% _.each(_.pairs(headers), function(pair) { %> "<%= pair[0] %>":"<%= pair[1] %>", <% }); %>
-};
+var headers = <% headers %>;
 
-for (var prop in headers) {
-  sendMessage('debug', prop + ":" + headers[prop]);
-}
+//for (var prop in headers) {
+//  sendMessage('debug', prop + ":" + headers[prop]);
+//}
 sendMessage('test', headers['x-custom']);
 sendMessage('done');
 
