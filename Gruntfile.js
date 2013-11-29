@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           page: {
             customHeaders: {
               'X-CUSTOM': 'custom_header_567'
-            },
+            }
           },
           expected: 'custom_header_567',
           test: function test(msg) {
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
             viewportSize: { 
               width: 1366, 
               height: 800 
-            },
+            }
           },
           expected: [1366, 800],
           test: function test(a, b) {
@@ -72,8 +72,8 @@ module.exports = function(grunt) {
             test.actual.push(a, b);
           }
         }
-      },
-    },
+      }
+    }
   });
 
   // The most basic of tests. Not even remotely comprehensive.
