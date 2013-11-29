@@ -1,7 +1,7 @@
 {
   "name": "grunt-lib-phantomjs",
   "description": "Grunt and PhantomJS, sitting in a tree.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "http://github.com/gruntjs/grunt-lib-phantomjs",
   "author": {
     "name": "Grunt Team",
@@ -34,10 +34,14 @@
     "lodash": "~1.3.1"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-jshint": "~0.6.2",
     "grunt": "~0.4.0",
     "difflet": "~0.2.3",
     "express": "~3.1.1"
   },
-  "main": "lib/phantomjs"
+  "main": "lib/phantomjs",
+  "files": [
+    "lib",
+    "phantomjs"
+  ]
 }
