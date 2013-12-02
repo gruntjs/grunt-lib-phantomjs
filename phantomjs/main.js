@@ -11,7 +11,6 @@
 'use strict';
 
 var fs = require('fs');
-var _ = require('lodash');
 
 // The temporary file used for communications.
 var tmpfile = phantom.args[0];
@@ -60,10 +59,9 @@ var inject = function() {
 
 // Add options to the page.
 if (options.page) {
-  _.extend(page, options.page);
-  // for (var prop in options.page) {
-  //   page[prop] = options.page[prop];
-  // }
+   for (var prop in options.page) {
+     page[prop] = options.page[prop];
+   }
 }
 
 // Keep track if the client-side helper script already has been injected.
