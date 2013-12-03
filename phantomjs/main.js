@@ -44,7 +44,7 @@ setInterval(function() {
 }, 100);
 
 // Create a new page.
-var page = require('webpage').create();
+var page = require('webpage').create(options.page);
 
 // Inject bridge script into client page.
 var injected;
@@ -56,13 +56,6 @@ var inject = function() {
   scripts.forEach(page.injectJs);
   injected = true;
 };
-
-// Add options to the page.
-if (options.page) {
-   for (var prop in options.page) {
-     page[prop] = options.page[prop];
-   }
-}
 
 // Keep track if the client-side helper script already has been injected.
 page.onUrlChanged = function(newUrl) {
