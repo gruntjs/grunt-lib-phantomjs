@@ -81,15 +81,14 @@ module.exports = function(grunt) {
     var options = this.options();
     var phantomjs = require('./lib/phantomjs').init(grunt);
 
-    var server = null;
-    if (options.server) { server = require(options.server); }
+    // Load up and Instantiate the test server
+    if (options.server) { require(options.server); }
 
     // Do something.
     phantomjs.on('test', options.test);
 
     phantomjs.on('done', function() {
       phantomjs.halt();
-      if (options.server) { server = require(options.server); }
     });
 
     phantomjs.on('debug', function(msg) {
@@ -99,7 +98,6 @@ module.exports = function(grunt) {
     // Built-in error handlers.
     phantomjs.on('fail.load', function(url) {
       phantomjs.halt();
-      if (options.server) { server = require(options.server); }
       grunt.verbose.write('Running PhantomJS...').or.write('...');
       grunt.log.error();
       grunt.warn('PhantomJS unable to load "' + url + '" URI.');
@@ -107,7 +105,6 @@ module.exports = function(grunt) {
 
     phantomjs.on('fail.timeout', function() {
       phantomjs.halt();
-      if (options.server) { server = require(options.server); }
       grunt.log.writeln();
       grunt.warn('PhantomJS timed out.');
     });
