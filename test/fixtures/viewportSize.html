@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+// Send messages to the parent PhantomJS process via alert! Good times!!
+function sendMessage() {
+  var args = [].slice.call(arguments);
+  alert(JSON.stringify(args));
+}
+
+var viewportWidth  = document.documentElement.clientWidth;
+var viewportHeight = document.documentElement.clientHeight;
+
+sendMessage('test', viewportWidth, viewportHeight);
+sendMessage('done');
+
+</script>
+</head>
+<body>
+</body>
+</html>
