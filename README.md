@@ -8,6 +8,12 @@ The best way to understand how this lib should be used is by looking at the [gru
 
 Also, in the case of the grunt-contrib-qunit plugin, it's important to know that the page being loaded into PhantomJS *doesn't* know it will be loaded into PhantomJS, and as such doesn't have any PhantomJS->Grunt code in it. That communication code, aka. the ["bridge"](https://github.com/gruntjs/grunt-contrib-qunit/blob/d99291713d32f84e50303d6e51eb2dab40b1deb6/phantomjs/bridge.js), is dynamically [injected into the html page](https://github.com/gruntjs/grunt-contrib-qunit/blob/d99291713d32f84e50303d6e51eb2dab40b1deb6/tasks/qunit.js#L152).
 
+### Options
+
+* `timeout`: PhantomJS' timeout, in milliseconds.
+* `inject`: JavaScript to inject into the page.
+* `page`: an object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
+
 ## An inline example
 
 If a Grunt task looked something like this:

@@ -42,7 +42,38 @@ module.exports = function(grunt) {
           }
         }
       },
-    },
+      headers: {
+        options: {
+          url: 'http://localhost:8075',
+          server: './test/fixtures/headers_server.js',
+          page: {
+            customHeaders: {
+              'X-CUSTOM': 'custom_header_567'
+            }
+          },
+          expected: 'custom_header_567',
+          test: function test(msg) {
+            test.actual = msg;
+          }
+        }
+      },
+      viewportSize: {
+        options: {
+          url: 'test/fixtures/viewportSize.html',
+          page: {
+            viewportSize: {
+              width: 1366,
+              height: 800
+            }
+          },
+          expected: [1366, 800],
+          test: function test(a, b) {
+            if (!test.actual) { test.actual = []; }
+            test.actual.push(a, b);
+          }
+        }
+      }
+    }
   });
 
   // The most basic of tests. Not even remotely comprehensive.
@@ -50,9 +81,17 @@ module.exports = function(grunt) {
     var options = this.options();
     var phantomjs = require('./lib/phantomjs').init(grunt);
 
+    // Load up and Instantiate the test server
+    if (options.server) { require(options.server); }
+
     // Do something.
     phantomjs.on('test', options.test);
+
     phantomjs.on('done', phantomjs.halt);
+
+    phantomjs.on('debug', function(msg) {
+        grunt.log.writeln('debug:' + msg);
+    });
 
     // Built-in error handlers.
     phantomjs.on('fail.load', function(url) {
