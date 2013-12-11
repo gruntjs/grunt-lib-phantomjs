@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<script>
+
+function sendMessage() {
+  var args = [].slice.call(arguments);
+  alert(JSON.stringify(args));
+}
+
+var headers = <% headers %>;
+
+sendMessage('test', headers['x-custom']);
+sendMessage('done');
+
+</script>
+</head>
+<body>
+</body>
+</html>
