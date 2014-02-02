@@ -39,6 +39,9 @@ sendMessage('private', 'version', phantom.version);
 setInterval(function() {
   if (new Date() - last > options.timeout) {
     sendMessage('fail.timeout');
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', (new Date()).getTime(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 }, 100);
@@ -126,6 +129,9 @@ page.onLoadFinished = function(status) {
   if (status !== 'success') {
     // File loading failure.
     sendMessage('fail.load', url);
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', (new Date()).getTime(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 };
