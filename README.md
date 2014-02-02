@@ -13,6 +13,7 @@ Also, in the case of the grunt-contrib-qunit plugin, it's important to know that
 * `timeout`: PhantomJS' timeout, in milliseconds.
 * `inject`: JavaScript to inject into the page.
 * `page`: an object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
+* `screenshot`: saves a screenshot on failure
 
 ## An inline example
 
@@ -109,6 +110,7 @@ PhantomJS requires these dependencies
 
 ## Release History
 
+* 2014-02-01 - v0.5.1-pre - /53 merged
 * 2014-01-17 - v0.5.0 - /41 /49 merged
 * 2013-08-02 - v0.4.0 - /34 /18 /24 merged
 * 2013-02-28 - v0.3.0 - Use PhantomJS 1.9.0-1.

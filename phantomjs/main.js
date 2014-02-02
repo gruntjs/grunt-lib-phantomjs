@@ -40,7 +40,7 @@ setInterval(function() {
   if (new Date() - last > options.timeout) {
     sendMessage('fail.timeout');
     if (options.screenshot) {
-      page.render(['page-at-timeout-', (new Date()).getTime(), '.jpg'].join(''));
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
     }
     phantom.exit();
   }
@@ -130,7 +130,7 @@ page.onLoadFinished = function(status) {
     // File loading failure.
     sendMessage('fail.load', url);
     if (options.screenshot) {
-      page.render(['page-at-timeout-', (new Date()).getTime(), '.jpg'].join(''));
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
     }
     phantom.exit();
   }
