@@ -1,5 +1,7 @@
 # grunt-lib-phantomjs
 
+[![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.png?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
+
 > Grunt and PhantomJS, sitting in a tree.
 
 ## Usage
