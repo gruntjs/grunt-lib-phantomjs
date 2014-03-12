@@ -37,10 +37,12 @@ module.exports = function(grunt) {
       inject: {
         options: {
           url: 'test/fixtures/inject.html',
-          inject: require('path').resolve('test/fixtures/inject.js'),
           expected: 'injected',
           test: function test(msg) {
             test.actual = msg;
+          },
+          phantomJSOptions: {
+            inject: require('path').resolve('test/fixtures/inject.js')
           }
         }
       },
@@ -48,30 +50,34 @@ module.exports = function(grunt) {
         options: {
           url: 'http://localhost:8075',
           server: './test/fixtures/headers_server.js',
-          page: {
-            customHeaders: {
-              'X-CUSTOM': 'custom_header_567'
-            }
-          },
           expected: 'custom_header_567',
           test: function test(msg) {
             test.actual = msg;
+          },
+          phantomJSOptions: {
+            page: {
+              customHeaders: {
+                'X-CUSTOM': 'custom_header_567'
+              }
+            }
           }
         }
       },
       viewportSize: {
         options: {
           url: 'test/fixtures/viewportSize.html',
-          page: {
-            viewportSize: {
-              width: 1366,
-              height: 800
-            }
-          },
           expected: [1366, 800],
           test: function test(a, b) {
             if (!test.actual) { test.actual = []; }
             test.actual.push(a, b);
+          },
+          phantomJSOptions: {
+            page: {
+              viewportSize: {
+                width: 1366,
+                height: 800
+              }
+            }
           }
         }
       }
@@ -115,7 +121,7 @@ module.exports = function(grunt) {
     // Spawn phantomjs
     phantomjs.spawn(options.url, {
       // Additional PhantomJS options.
-      options: options,
+      options: options.phantomJSOptions,
       // Complete the task when done.
       done: function(err) {
         if (err) { done(err); return; }
