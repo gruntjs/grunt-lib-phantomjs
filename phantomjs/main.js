@@ -51,7 +51,7 @@ setInterval(function() {
 }, 100);
 
 // Create a new page.
-var page = require('webpage').create();
+var page = require('webpage').create(options.page);
 
 // Inject bridge script into client page.
 var injected;
