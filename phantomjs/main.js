@@ -116,8 +116,7 @@ page.onResourceRequested = function(request, networkRequest) {
 
     if (!!instrumentedFiles[currentFile]) {
       content = instrumentedFiles[currentFile];
-      fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
-      networkRequest.changeUrl(options.transport.instrumentedFiles + currentFile);
+      changeContentHack(currentFile, content);
     }
   }
 
@@ -134,10 +133,20 @@ page.onResourceRequested = function(request, networkRequest) {
       }
 
       try {
-        fs.write(options.transport.instrumentedFiles + '/' + currentFile, content, 'w');
-        networkRequest.changeUrl(options.transport.instrumentedFiles + '/' + currentFile);
+        changeContentHack(currentFile, content);
       } catch (e) {}
     }
+  }
+  
+  function changeContentHack(id,content){
+    var escaped = [/:/g, /\//g, /\\/g]; //may need more characters
+    id = id.replace(/@/g,"@@");
+    for(var i = 0; i < escaped.length; i++){
+      id = id.replace(escaped[i], "@"+i+"_");
+    }
+    id = options.transport.instrumentedFiles + '/' + id;
+    fs.write(id, content, 'w');
+    networkRequest.changeUrl(id);
   }
 };
 
