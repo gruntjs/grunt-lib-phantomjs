@@ -138,6 +138,10 @@ page.onResourceRequested = function(request, networkRequest) {
     }
   }
   
+  // Phantom can not serve static content at this point.
+  // So the file is stored in a temp dictionary and phantom is rerouted.
+  // The name of the temp file is an escaped version of the original path.
+  // The escaped path (id) is only used locally in this function.
   function changeContentHack(id,content){
     var escaped = [/:/g, /\//g, /\\/g]; //may need more characters
     id = id.replace(/@/g,"@@");
