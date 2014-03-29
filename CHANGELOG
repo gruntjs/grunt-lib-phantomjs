@@ -1,3 +1,9 @@
+v0.6.0:
+  date: 2014-03-28
+  changes:
+    - Allow "spawn" to be called without options.
+    - Kill spawned phantomjs process on cleanup() in case something is keeping it open.
+    - Added option for screenshots.
 v0.5.0:
   date: 2014-01-17
   changes:

@@ -109,12 +109,3 @@ Aborted due to warnings.
 PhantomJS requires these dependencies
 **On Ubuntu/Debian**
   apt-get install libfontconfig1 fontconfig libfontconfig1-dev libfreetype6-dev
-
-## Release History
-
-* 2014-02-01 - v0.5.1-pre - /53 merged
-* 2014-01-17 - v0.5.0 - /41 /49 merged
-* 2013-08-02 - v0.4.0 - /34 /18 /24 merged
-* 2013-02-28 - v0.3.0 - Use PhantomJS 1.9.0-1.
-* 2013-02-28 - v0.2.0 - Use PhantomJS 1.8.1.
-* 2012-12-21 - v0.1.0 - Use PhantomJS 1.7.0.
