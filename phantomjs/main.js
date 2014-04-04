@@ -108,6 +108,7 @@ page.onResourceRequested = function(request, networkRequest) {
   // process file based ressources
   if (isFile) {
     currentFile = request.url.replace('file://', '');
+    currentFile = currentFile.replace(/%20/g, ' ');
 
     // check for query params (and thropw them away)
     if (currentFile.indexOf('?') > 0) {
