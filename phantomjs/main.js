@@ -116,8 +116,7 @@ page.onResourceRequested = function(request, networkRequest) {
 
     if (!!instrumentedFiles[currentFile]) {
       content = instrumentedFiles[currentFile];
-      fs.write(options.transport.instrumentedFiles + currentFile, content, 'w');
-      networkRequest.changeUrl(options.transport.instrumentedFiles + currentFile);
+      changeContentHack(currentFile, content);
     }
   }
 
@@ -134,10 +133,24 @@ page.onResourceRequested = function(request, networkRequest) {
       }
 
       try {
-        fs.write(options.transport.instrumentedFiles + '/' + currentFile, content, 'w');
-        networkRequest.changeUrl(options.transport.instrumentedFiles + '/' + currentFile);
+        changeContentHack(currentFile, content);
       } catch (e) {}
     }
+  }
+  
+  // Phantom can not serve static content at this point.
+  // So the file is stored in a temp dictionary and phantom is rerouted.
+  // The name of the temp file is an escaped version of the original path.
+  // The escaped path (id) is only used locally in this function.
+  function changeContentHack(id,content){
+    var escaped = [/:/g, /\//g, /\\/g]; //may need more characters
+    id = id.replace(/@/g,"@@");
+    for(var i = 0; i < escaped.length; i++){
+      id = id.replace(escaped[i], "@"+i+"_");
+    }
+    id = options.transport.instrumentedFiles + '/' + id;
+    fs.write(id, content, 'w');
+    networkRequest.changeUrl(id);
   }
 };
 
