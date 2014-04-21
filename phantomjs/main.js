@@ -42,16 +42,20 @@ var sendMessage = function(arg) {
 // This allows grunt to abort if the PhantomJS version isn't adequate.
 sendMessage('private', 'version', phantom.version);
 
+// Create a new page.
+var page = require('webpage').create(options.page);
+
 // Abort if the page doesn't send any messages for a while.
 setInterval(function() {
   if (new Date() - last > options.timeout) {
     sendMessage('fail.timeout');
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 }, 100);
 
-// Create a new page.
-var page = require('webpage').create(options.page);
 
 // Inject bridge script into client page.
 var injected;
@@ -191,6 +195,9 @@ page.onLoadFinished = function(status) {
   if (status !== 'success') {
     // File loading failure.
     sendMessage('fail.load', url);
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 };
