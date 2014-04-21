@@ -1,7 +1,7 @@
 {
   "name": "grunt-lib-phantomjs-istanbul",
   "description": "Grunt and PhantomJS, sitting in a tree for istanbul based code coverage.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "homepage": "http://github.com/asciidisco/grunt-lib-phantomjs-istanbul",
   "author": {
     "name": "Grunt Team",
@@ -21,10 +21,10 @@
     }
   ],
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt jshint test"
   },
   "dependencies": {
     "eventemitter2": "~0.4.9",
@@ -36,7 +36,8 @@
     "grunt-contrib-jshint": "~0.6.2",
     "grunt": "~0.4.0",
     "difflet": "~0.2.3",
-    "express": "~3.1.1"
+    "express": "~3.1.1",
+    "grunt-cli": "~0.1.13"
   },
   "main": "lib/phantomjs",
   "files": [
