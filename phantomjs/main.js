@@ -104,6 +104,10 @@ page.onError = function(msg, trace) {
   sendMessage('error.onError', msg, trace);
 };
 
+phantom.onError = function(msg, trace) {
+  sendMessage('error.onError', msg, trace);
+};
+
 // Run before the page is loaded.
 page.onInitialized = function() {
   sendMessage('onInitialized');
