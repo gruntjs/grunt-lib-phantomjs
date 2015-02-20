@@ -1,8 +1,7 @@
-# grunt-lib-phantomjs
-
-[![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.png?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
+# grunt-lib-phantomjs [![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.png?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
 
 > Grunt and PhantomJS, sitting in a tree.
+
 
 ## Usage
 
@@ -105,7 +104,11 @@ Warning: Task "mytask" failed. Use --force to continue.
 Aborted due to warnings.
 ```
 
+
 ## OS Dependencies
-PhantomJS requires these dependencies
-**On Ubuntu/Debian**
-  apt-get install libfontconfig1 fontconfig libfontconfig1-dev libfreetype6-dev
+
+PhantomJS requires these dependencies on Ubuntu/Debian:
+
+```
+apt-get install libfontconfig1 fontconfig libfontconfig1-dev libfreetype6-dev
+```
