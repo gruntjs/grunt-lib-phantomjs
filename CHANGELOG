@@ -1,3 +1,9 @@
+v0.7.0:
+  date: 2015-02-20
+  changes:
+    - Bump `phantomjs` dependency.
+    - Add a handler for `phantom.onError`.
+    - Check for a pid rather than connected property of process before killing it.
 v0.6.0:
   date: 2014-03-28
   changes:
