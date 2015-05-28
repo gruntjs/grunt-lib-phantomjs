@@ -7,12 +7,7 @@
     "url": "http://gruntjs.com/"
   },
   "repository": "gruntjs/grunt-lib-phantomjs",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/gruntjs/grunt-lib-phantomjs/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "engines": {
     "node": ">=0.10.0"
   },
