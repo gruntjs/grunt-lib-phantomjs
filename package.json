@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "eventemitter2": "^0.4.9",
-    "phantomjs": "^1.9.15",
+    "phantomjs": "^1.9.18",
     "semver": "^4.3.0",
     "temporary": "^0.0.8"
   },
