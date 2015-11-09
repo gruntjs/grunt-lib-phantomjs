@@ -15,6 +15,15 @@ Also, in the case of the grunt-contrib-qunit plugin, it's important to know that
 * `inject`: JavaScript to inject into the page.
 * `page`: an object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
 * `screenshot`: saves a screenshot on failure
+* `viewport`: viewport size
+
+####Viewport Option
+```javascript
+viewport: {
+  width: 1280,
+  height: 900
+}
+```
 
 ## An inline example
 
