@@ -39,6 +39,14 @@ sendMessage('private', 'version', phantom.version);
 // Create a new page.
 var page = require('webpage').create(options.page);
 
+// Viewport option
+if(options.viewport) {
+  page.viewportSize = {
+    width: options.viewport.width,
+    height: options.viewport.height
+  };
+}
+
 // Abort if the page doesn't send any messages for a while.
 setInterval(function() {
   if (new Date() - last > options.timeout) {
