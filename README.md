@@ -9,12 +9,6 @@ The best way to understand how this lib should be used is by looking at the [gru
 
 Also, in the case of the grunt-contrib-qunit plugin, it's important to know that the page being loaded into PhantomJS *doesn't* know it will be loaded into PhantomJS, and as such doesn't have any PhantomJS->Grunt code in it. That communication code, aka. the ["bridge"](https://github.com/gruntjs/grunt-contrib-qunit/blob/d99291713d32f84e50303d6e51eb2dab40b1deb6/phantomjs/bridge.js), is dynamically [injected into the html page](https://github.com/gruntjs/grunt-contrib-qunit/blob/d99291713d32f84e50303d6e51eb2dab40b1deb6/tasks/qunit.js#L152).
 
-### Options
-
-* `timeout`: PhantomJS' timeout, in milliseconds.
-* `inject`: JavaScript to inject into the page.
-* `page`: an object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
-* `screenshot`: saves a screenshot on failure
 
 ## An inline example
 
@@ -103,6 +97,87 @@ Warning: Task "mytask" failed. Use --force to continue.
 
 Aborted due to warnings.
 ```
+
+
+## API
+
+### phantomjs.halt()
+
+Call this when everything has finished successfully, or when something horrible happens, and you need to clean up and abort.
+
+### phantomjs.spawn(pageURL, options)
+
+Spawn a `PhantomJS` process. The method returns a reference to the spawned process.<br>
+This method has the following arguments:
+
+#### pageURL
+
+Type: `string`<br>
+Default: no default value, the user has to set it explicitly.
+
+URL or path to the page .html test file to run.
+
+#### Options
+
+Type: `object`
+
+The options object has these possible properties:
+
+##### done
+
+Type: `function`<br>
+Default: no default value, the user has to set it explicitly.
+
+The callback to call when the task is done.
+
+##### failCode
+
+Type: `number`<br>
+Default: 0
+
+The error code to exit with when an Error occurs.
+
+##### killTimeout
+
+Type: `number`<br>
+Default: `1000` ms
+
+The timeout in milliseconds after which the PhantomJS process will be killed.
+
+##### options (PhantomJS options)
+
+Type: `object`<br>
+Default: `{}`
+
+Additional options to passe to `PhantomJS`. This object has the following properties:
+
+###### timeout
+
+Type: `number`<br>
+Default: `undefined`
+
+PhantomJS' timeout, in milliseconds.
+
+###### inject
+
+Type: `string|array`<br>
+Default: `undefined`
+
+One or multiple (array) JavaScript file names to inject into the page.
+
+###### page
+
+Type: `object`<br>
+Default: `undefined`
+
+An object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
+
+###### screenshot
+
+Type: `boolean`<br>
+Default: `undefined`
+
+Saves a screenshot on failure
 
 
 ## OS Dependencies
