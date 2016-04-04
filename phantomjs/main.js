@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  */
 
-/*global phantom:true*/
+/* jshint phantom:true */
 
 'use strict';
 
@@ -80,7 +80,7 @@ page.onAlert = function(str) {
   // Unless there's a parse error. Then, complain.
   try {
     sendMessage(JSON.parse(str));
-  } catch(err) {
+  } catch (err) {
     sendMessage('error.invalidJSON', str);
   }
 };
@@ -118,7 +118,7 @@ page.onInitialized = function() {
   // script to inject the bridge. This should ensure that the bridge gets
   // injected before any other DOMContentLoaded or window.load event handler.
   page.evaluate(function() {
-    /*jshint browser:true, devel:true */
+    /* jshint browser:true, devel:true */
     document.addEventListener('DOMContentLoaded', function() {
       alert('inject');
     }, false);

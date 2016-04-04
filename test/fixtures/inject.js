@@ -1,3 +1,5 @@
+'use strict';
+
 // Send messages to the parent PhantomJS process via alert! Good times!!
 function sendMessage() {
   var args = [].slice.call(arguments);

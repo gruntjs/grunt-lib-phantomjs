@@ -98,7 +98,7 @@ module.exports = function(grunt) {
     phantomjs.on('done', phantomjs.halt);
 
     phantomjs.on('debug', function(msg) {
-        grunt.log.writeln('debug:' + msg);
+      grunt.log.writeln('debug:' + msg);
     });
 
     // Built-in error handlers.
