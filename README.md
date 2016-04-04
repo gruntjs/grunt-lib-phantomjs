@@ -1,4 +1,4 @@
-# grunt-lib-phantomjs [![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.png?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
+# grunt-lib-phantomjs [![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.svg?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
 
 > Grunt and PhantomJS, sitting in a tree.
 
@@ -107,12 +107,12 @@ Call this when everything has finished successfully, or when something horrible 
 
 ### phantomjs.spawn(pageURL, options)
 
-Spawn a `PhantomJS` process. The method returns a reference to the spawned process.<br>
+Spawn a `PhantomJS` process. The method returns a reference to the spawned process.  
 This method has the following arguments:
 
 #### pageURL
 
-Type: `string`<br>
+Type: `string`  
 Default: no default value, the user has to set it explicitly.
 
 URL or path to the page .html test file to run.
@@ -125,56 +125,56 @@ The options object has these possible properties:
 
 ##### done
 
-Type: `function`<br>
+Type: `function`  
 Default: no default value, the user has to set it explicitly.
 
 The callback to call when the task is done.
 
 ##### failCode
 
-Type: `number`<br>
+Type: `number`  
 Default: 0
 
 The error code to exit with when an Error occurs.
 
 ##### killTimeout
 
-Type: `number`<br>
+Type: `number`  
 Default: `1000` ms
 
 The timeout in milliseconds after which the PhantomJS process will be killed.
 
 ##### options (PhantomJS options)
 
-Type: `object`<br>
+Type: `object`  
 Default: `{}`
 
 Additional options to passe to `PhantomJS`. This object has the following properties:
 
 ###### timeout
 
-Type: `number`<br>
+Type: `number`  
 Default: `undefined`
 
 PhantomJS' timeout, in milliseconds.
 
 ###### inject
 
-Type: `string|array`<br>
+Type: `string|array`  
 Default: `undefined`
 
 One or multiple (array) JavaScript file names to inject into the page.
 
 ###### page
 
-Type: `object`<br>
+Type: `object`  
 Default: `undefined`
 
 An object of options for the PhantomJS [`page` object](https://github.com/ariya/phantomjs/wiki/API-Reference-WebPage).
 
 ###### screenshot
 
-Type: `boolean`<br>
+Type: `boolean`  
 Default: `undefined`
 
 Saves a screenshot on failure
