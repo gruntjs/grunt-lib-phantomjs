@@ -32,5 +32,6 @@
   "files": [
     "lib",
     "phantomjs"
-  ]
+  ],
+  "appveyor_id": "69g3o5c5m0fyih9r"
 }

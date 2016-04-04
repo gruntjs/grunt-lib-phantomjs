@@ -1,4 +1,4 @@
-# grunt-lib-phantomjs [![Build Status](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.svg?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs)
+# grunt-lib-phantomjs [![Build Status: Linux](https://travis-ci.org/gruntjs/grunt-lib-phantomjs.svg?branch=master)](https://travis-ci.org/gruntjs/grunt-lib-phantomjs) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/69g3o5c5m0fyih9r/branch/master?svg=true)](https://ci.appveyor.com/project/gruntjs/grunt-lib-phantomjs/branch/master)
 
 > Grunt and PhantomJS, sitting in a tree.
 
