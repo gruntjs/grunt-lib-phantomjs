@@ -1,3 +1,10 @@
+v1.0.2:
+  date: 2016-04-14
+  changes:
+    - Update dependencies.
+    - Add API docs to `README`
+    - Fix EBUSY error on Windows when deleting temp file
+    - Set a default value to `options.killTimeout`
 v1.0.1:
   date: 2016-02-12
   changes:
