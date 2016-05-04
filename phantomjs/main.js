@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  */
 
-/*global phantom:true, WebSocket:true*/
+/* jshint phantom:true */
 
 'use strict';
 
