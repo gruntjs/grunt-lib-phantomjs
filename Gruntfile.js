@@ -120,6 +120,7 @@ module.exports = function(grunt) {
 
     // Spawn phantomjs
     phantomjs.spawn(options.url, {
+      killTimeout: 50,
       // Additional PhantomJS options.
       options: options.phantomJSOptions,
       // Complete the task when done.
