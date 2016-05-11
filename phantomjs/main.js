@@ -142,13 +142,11 @@ page.onLoadFinished = function(status) {
   }
 };
 
-page.onResourceError = function(resourceError)
-{
-  sendMessage('error.resourceError', resourceError);
+page.onResourceError = function(resourceError) {
+  sendMessage('error.onResourceError', resourceError);
 };
 
-page.onResourceTimeout = function(request)
-{
+page.onResourceTimeout = function(request) {
   sendMessage('error.onResourceTimeout', request);
 };
 
