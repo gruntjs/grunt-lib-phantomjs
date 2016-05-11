@@ -142,14 +142,13 @@ page.onLoadFinished = function(status) {
   }
 };
 
-page.onResourceError = function(resourceError) { 
-  sendMessage('error.onResourceError', resourceError); 
-}; 
- 
-page.onResourceTimeout = function(request) { 
-  sendMessage('error.onResourceTimeout', request); 
-}; 
+page.onResourceError = function(resourceError) {
+  sendMessage('error.onResourceError', resourceError);
+};
 
+page.onResourceTimeout = function(request) {
+  sendMessage('error.onResourceTimeout', request);
+};
 
 // Actually load url.
 page.open(url);
