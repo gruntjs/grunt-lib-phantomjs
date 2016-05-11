@@ -1,7 +1,7 @@
 {
   "name": "grunt-lib-phantomjs",
   "description": "Grunt and PhantomJS, sitting in a tree",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "author": {
     "name": "Grunt Team",
     "url": "http://gruntjs.com/"
