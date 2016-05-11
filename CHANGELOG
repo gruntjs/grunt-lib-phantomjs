@@ -1,3 +1,8 @@
+v1.0.3:
+  date: 2016-05-11
+  changes:
+    - Added onResourceError event handler
+    - Added onResourceTimeout handler
 v1.0.2:
   date: 2016-04-14
   changes:
