@@ -104,14 +104,30 @@ page.onResourceRequested = function(request, networkRequest) {
   if (!useInstrumentedFiles) { return; }
 
   // determine the protocol
-  var isFile = !!(request.url.search('file://') !== -1);
-  var isHttp = !!(request.url.search('http://') !== -1);
-  var isHttps = !!(request.url.search('https://') !== -1);
+  var isFile = request.url.search('file://') !== -1;
+  var isHttp = request.url.search('http://') !== -1;
+  var isHttps = request.url.search('https://') !== -1;
+  var currentFile, content, prefix;
 
-  var currentFile, content;
+  // Phantom can not serve static content at this point.
+  // So the file is stored in a temp dictionary and phantom is rerouted.
+  // The name of the temp file is an escaped version of the original path.
+  // The escaped path (id) is only used locally in this function.
+  function changeContentHack(id, content) {
+    var escaped = [/:/g, /\//g, /\\/g]; //may need more characters
+    id = id.replace(/@/g, "@@");
+    for(var i = 0; i < escaped.length; i++){
+      id = id.replace(escaped[i], "@" + i + "_");
+    }
+    id = options.transport.instrumentedFiles + '/' + id;
+    fs.write(id, content, 'w');
+    networkRequest.changeUrl(prefix + id);
+  }
+
   // process file based ressources
   if (isFile) {
-    currentFile = request.url.replace('file://', '');
+    prefix = 'file://';
+    currentFile = request.url.replace(prefix, '');
     currentFile = currentFile.replace(/%20/g, ' ');
 
     // check for query params (and thropw them away)
@@ -127,8 +143,9 @@ page.onResourceRequested = function(request, networkRequest) {
 
   // process http based ressources
   if (isHttp || isHttps) {
+    prefix = isHttp ? 'http://' : 'https://';
     var undef;
-    var temp = isHttp ? request.url.replace('http://', '').split('/') : request.url.replace('https://', '').split('/');
+    var temp = request.url.replace(prefix, '').split('/');
     temp.shift();
     currentFile = temp.join('/');
     if (!!instrumentedFiles[currentFile]) {
@@ -141,21 +158,6 @@ page.onResourceRequested = function(request, networkRequest) {
         changeContentHack(currentFile, content);
       } catch (e) {}
     }
-  }
-
-  // Phantom can not serve static content at this point.
-  // So the file is stored in a temp dictionary and phantom is rerouted.
-  // The name of the temp file is an escaped version of the original path.
-  // The escaped path (id) is only used locally in this function.
-  function changeContentHack(id,content){
-    var escaped = [/:/g, /\//g, /\\/g]; //may need more characters
-    id = id.replace(/@/g,"@@");
-    for(var i = 0; i < escaped.length; i++){
-      id = id.replace(escaped[i], "@"+i+"_");
-    }
-    id = options.transport.instrumentedFiles + '/' + id;
-    fs.write(id, content, 'w');
-    networkRequest.changeUrl(id);
   }
 };
 
