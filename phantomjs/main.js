@@ -122,6 +122,16 @@ page.onResourceRequested = function(request, networkRequest) {
     id = options.transport.instrumentedFiles + '/' + id;
     fs.write(id, content, 'w');
     networkRequest.changeUrl(prefix + id);
+     if(isHttp || isHttps)
+     {
+       //get the hostname from the request object.
+       var hostname = request.url.replace(prefix, '').split('/')[0];
+       networkRequest.changeUrl(prefix + hostname + '/' + id); /*For HTML test files served by a web server (e.g., localhost),
+                                                                 the change Url MUST include the hostname else the Url is unresolved
+                                                                 which generates an error in PhantomJS.*/ 
+     }else{
+       networkRequest.changeUrl(prefix + id); 
+     }
   }
 
   // process file based ressources
