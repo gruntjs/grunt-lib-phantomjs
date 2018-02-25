@@ -30,7 +30,7 @@ var last = new Date();
 var sendMessage = function(arg) {
   var args = Array.isArray(arg) ? arg : [].slice.call(arguments);
   last = new Date();
-  fs.write(tmpfile, JSON.stringify(args) + '\n', 'a');
+  fs.writeSync(tmpfile, JSON.stringify(args) + '\n', 'a');
 };
 
 // This allows grunt to abort if the PhantomJS version isn't adequate.
